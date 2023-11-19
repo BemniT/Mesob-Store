@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".App_fragment"
+    >
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!-- TODO: Update blank fragment layout -->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/line"
+            android:layout_below="@id/horizontalScrollView"/>
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/tabContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+               >
+
+            <TextView
+                android:id="@+id/app_foryou"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="For you"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/top_text"
+                />
+
+                <TextView
+                    android:id="@+id/app_top_chart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Top Charts"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/top_text"
+                    android:paddingLeft="30dp"/>
+
+                <TextView
+                    android:id="@+id/new_chart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/top_text"
+                    android:paddingLeft="30dp"/>
+                <TextView
+                    android:id="@+id/app_categories_chart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Categoies"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/top_text"
+                    android:paddingLeft="30dp"/>
+
+        </LinearLayout>
+        </HorizontalScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_app_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/horizontalScrollView"
+            android:layout_marginBottom="77dp"
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </RelativeLayout>
+
+</FrameLayout>

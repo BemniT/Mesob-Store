@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+   android:background="@color/white"
+    app:cardCornerRadius="20dp"
+   >
+
+    <RelativeLayout
+        android:layout_width="170dp"
+        android:layout_height="150dp">
+
+        <ImageView
+            android:id="@+id/book_Image"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:scaleType="center"
+            android:layout_marginTop="2dp"/>
+<!--            android:layout_below="@+id/product_name"-->
+
+        <TextView
+            android:id="@+id/book_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Book name"
+            android:layout_below="@+id/book_Image"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/book_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Book Description"
+            android:layout_below="@+id/book_name"
+            android:layout_marginTop="3dp"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

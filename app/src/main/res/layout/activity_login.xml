@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login_Activity"
+    android:background="@drawable/body">
+
+    <TextView
+        android:id="@+id/letsStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome Back!"
+        android:textColor="@color/black"
+        android:layout_below="@+id/app_logo"
+        android:textSize="30sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-20dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log in your existant account of Mesob Store"
+        android:textColor="@color/black"
+        android:layout_below="@+id/letsStart"
+        android:textSize="10sp"
+        android:layout_centerHorizontal="true"
+
+        />
+
+    <ImageView
+        android:id="@+id/app_logo"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:src="@drawable/logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        />
+
+
+
+
+    <EditText
+        android:id="@+id/login_phonenumber"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/bar"
+        android:layout_below="@+id/app_logo"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="90dp"
+        android:paddingLeft="35dp"
+        android:hint="@string/phone_number"
+        android:inputType="number"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="17sp"
+        android:textStyle="bold"
+
+        />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/letsStart"
+        android:layout_marginTop="63.5dp"
+        android:layout_marginRight="-100dp"
+        android:background="@drawable/phone"
+        android:layout_toLeftOf="@id/login_phonenumber"/>
+
+    <EditText
+        android:id="@+id/login_password"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/login_phonenumber"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="27dp"
+        android:inputType="textPassword"
+        android:paddingLeft="35dp"
+        android:hint="Password"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:background="@drawable/bar"
+        android:textSize="17sp"
+        android:textStyle="bold"
+
+        />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/login_phonenumber"
+        android:layout_marginTop="21.5dp"
+        android:layout_marginRight="-100dp"
+        android:background="@drawable/password"
+        android:layout_toLeftOf="@id/login_password"/>
+
+
+
+    <ImageButton
+        android:id="@+id/login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_below="@+id/login_password"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginBottom="10dp"
+        android:text="Login"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:background="@drawable/loginbtn"
+        />
+
+    <LinearLayout
+        android:id="@+id/linear_layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/login_btn"
+        >
+
+        <CheckBox
+            android:id="@+id/rememberMe_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:height="48dp"
+            android:text="Remember me"
+            android:textColor="@color/black"
+            tools:ignore="TouchTargetSizeCheck"
+            />
+
+        <TextView
+            android:id="@+id/forgot_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password?"
+            android:textColor="@color/black"
+            android:layout_marginStart="70dp"
+            android:textStyle="bold"
+
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/or_dash"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/or_dash"
+        android:layout_below="@id/linear_layout1"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        />
+
+
+    <ImageButton
+        android:id="@+id/log_signUp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/or_dash"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:background="@drawable/log_signup"
+        />
+
+
+
+</RelativeLayout>

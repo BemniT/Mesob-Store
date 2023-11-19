@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Software_Detail_Activity">
+
+    <ImageView
+        android:id="@+id/book_backBtn"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="13dp"
+        android:src="@drawable/baseline_arrow_back_24"
+        />
+
+
+    <ImageView
+        android:id="@+id/book_image"
+        android:layout_width="175dp"
+        android:layout_height="220dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="60dp"
+        android:background="@color/black"
+        >
+    </ImageView>
+
+    <TextView
+        android:id="@+id/book_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/book_image"
+        android:layout_marginTop="60dp"
+        android:text="The Secret"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
+        android:textSize="28sp"
+        />
+
+
+    <TextView
+        android:id="@+id/book_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/book_image"
+        android:layout_below="@+id/book_name"
+        android:layout_marginTop="10dp"
+        android:text="The Secret"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/book_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/book_image"
+        android:layout_below="@+id/book_date"
+        android:layout_marginTop="20dp"
+        android:text="The Secret"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        />
+
+
+    <Button
+        android:id="@+id/book_download"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/book_author"
+        android:layout_toRightOf="@id/book_image"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:text="Download"
+        android:textAllCaps="true"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/book_intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/book_image"
+        android:layout_marginTop="50dp"
+        android:text="INTRODUTION"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
+        android:textSize="27sp"
+        />
+
+    <TextView
+        android:id="@+id/book_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/book_intro"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:textSize="24dp"
+        />
+
+
+</RelativeLayout>

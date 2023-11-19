@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1041052914588",
+    "project_id": "ethiostore-17d9f",
+    "storage_bucket": "ethiostore-17d9f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041052914588:android:dcd2751d2217c184266e59",
+        "android_client_info": {
+          "package_name": "com.example.ethiostore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCizXd7VFgbQ29-oDnegBLDPRDNiEdrKP8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
