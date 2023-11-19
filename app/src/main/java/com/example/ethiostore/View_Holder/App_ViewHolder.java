@@ -16,14 +16,16 @@ import com.example.ethiostore.R;
 public class App_ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private ItemClickListener itemClickListener;
-    public TextView app_name, app_description;
+    public TextView app_name, app_size;
     public ImageView app_image;
+
 
     public App_ViewHolder(@NonNull View itemView) {
         super(itemView);
 
         app_name = itemView.findViewById(R.id.app_name);
         app_image = itemView.findViewById(R.id.app_Image);
+        app_size = itemView.findViewById(R.id.app_size);
     }
 
 

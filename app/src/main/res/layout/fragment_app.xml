@@ -74,15 +74,59 @@
         </LinearLayout>
         </HorizontalScrollView>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_app_view"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scrollerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/horizontalScrollView"
-            android:layout_marginBottom="77dp"
-            >
+            android:layout_marginTop="5dp"
+            android:scrollbars="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Horizontal_recyclerApp"
+                android:layout_width="match_parent"
+                android:layout_height="205dp"
+                android:clipToPadding="false"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:scrollbars="horizontal"
+                android:layout_centerHorizontal="true"/>
+
+            <!-- Vertical RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Vertical_recycler_app"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Horizontal_recyclerApp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="77dp"
+                android:padding="16dp"/>
+            </RelativeLayout>
+
+            <!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/Horizontal_recyclerApp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="150dp"-->
+<!--                android:layout_marginBottom="77dp"-->
+<!--                android:scrollbars="horizontal"-->
+
+<!--                >-->
+<!--            </androidx.recyclerview.widget.RecyclerView>-->
+
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/Vertical_recycler_app"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="370dp"-->
+<!--                    android:layout_marginBottom="77dp"-->
+<!--                    android:layout_marginTop="200dp"></androidx.recyclerview.widget.RecyclerView>-->
+<!--            </RelativeLayout>-->
+
+        </androidx.core.widget.NestedScrollView>
+
+
 
     </RelativeLayout>
 

@@ -2,11 +2,14 @@ package com.example.ethiostore;
 
 import static java.security.AccessController.getContext;
 
+import android.content.ClipData;
+import android.media.RouteListingPreference;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -18,15 +21,23 @@ import android.widget.TextView;
 import com.example.ethiostore.Model.Apps;
 import com.example.ethiostore.View_Holder.App_ViewHolder;
 import com.example.ethiostore.View_Holder.Book_ViewHolder;
+import com.example.ethiostore.View_Holder.HorizontalAdapter;
+import com.example.ethiostore.View_Holder.VerticalAdapter;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import org.checkerframework.framework.qual.DefaultQualifier;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class App_fragment extends Fragment {
@@ -37,7 +48,7 @@ public class App_fragment extends Fragment {
     private String mParam2;
 
     private TextView forYou, Top, categories, news;
-    private RecyclerView recyclerView;
+    private RecyclerView horizontalRecyclerView, verticalRecyclerView ;
     RecyclerView.LayoutManager layoutManager;
 
     private DatabaseReference appRef;
@@ -66,8 +77,8 @@ public class App_fragment extends Fragment {
 
 
 
-
-        //news = news.findViewById(R.id.app)
+        fetchHorizontalData();
+        fetchVerticalData();
     }
 
     @Override
@@ -76,45 +87,66 @@ public class App_fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_app, container, false);
 
-        recyclerView = view.findViewById(R.id.recycler_app_view);
-        recyclerView.hasFixedSize();
-        layoutManager = new GridLayoutManager(getContext(), 2);
-        recyclerView.setLayoutManager(layoutManager);
 
+         horizontalRecyclerView = view.findViewById(R.id.Horizontal_recyclerApp);
+        // horizontalRecyclerView.setNestedScrollingEnabled(false);
+         verticalRecyclerView = view.findViewById(R.id.Vertical_recycler_app);
 //        forYou = forYou.findViewById(R.id.app_foryou);
 //        Top = Top.findViewById(R.id.app_top_chart);
 //        categories = categories.findViewById(R.id.app_categories_chart);
         return view;
     }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
+    private void fetchHorizontalData()
+    {
         appRef = FirebaseDatabase.getInstance().getReference().child("Apps");
 
-
-        FirebaseRecyclerOptions<Apps> options = new FirebaseRecyclerOptions.Builder<Apps>()
-                .setQuery(appRef, Apps.class).build();
-
-        FirebaseRecyclerAdapter<Apps, App_ViewHolder> adapter = new FirebaseRecyclerAdapter<Apps, App_ViewHolder>(options)
-        {
+        appRef.limitToFirst(5).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            protected void onBindViewHolder(@NonNull App_ViewHolder holder, int position, @NonNull Apps model)
+            public void onDataChange(@NonNull DataSnapshot snapshot)
             {
-                holder.app_name.setText(model.getSname());
-                Picasso.get().load(model.getImage()).into(holder.app_image);
+                List<Apps> horizontalItem = new ArrayList<>();
+                for(DataSnapshot snapshot1 : snapshot.getChildren())
+                {
+                    Apps apps = snapshot1.getValue(Apps.class);
+                    horizontalItem.add(apps);
+                }
+                HorizontalAdapter horizontalAdapter = new HorizontalAdapter(horizontalItem);
+                LinearLayoutManager horizontalLayoutManger = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false);
+
+                horizontalRecyclerView.setLayoutManager(horizontalLayoutManger);
+                horizontalRecyclerView.setAdapter(horizontalAdapter);
             }
 
-            @NonNull
             @Override
-            public App_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.app_card_view,parent , false);
-                App_ViewHolder holder = new App_ViewHolder(view);
-                return holder;
+            public void onCancelled(@NonNull DatabaseError error)
+            {
+                
             }
-        };
-        recyclerView.setAdapter(adapter);
-        adapter.startListening();
+        });
+    }
+
+    private void fetchVerticalData()
+    {
+        appRef = FirebaseDatabase.getInstance().getReference().child("Apps");
+        appRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Apps> verticalItems = new ArrayList<>();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren())
+                {
+                    Apps apps = dataSnapshot.getValue(Apps.class);
+                    verticalItems.add(apps);
+                }
+                VerticalAdapter verticalAdapter = new VerticalAdapter(verticalItems) ;
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
+                verticalRecyclerView.setLayoutManager(gridLayoutManager);
+                verticalRecyclerView.setAdapter(verticalAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
