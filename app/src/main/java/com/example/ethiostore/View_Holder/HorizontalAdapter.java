@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ethiostore.Model.Apps;
 import com.example.ethiostore.R;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.util.List;
 
@@ -38,14 +37,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.So
         Apps apps = horizontalItem.get(position);
         holder.app_name.setText(apps.getSname());
         Picasso.get().load(apps.getImage()).into(holder.app_image);
-        Picasso.get().load(apps.getImage()).into(holder.app_icon);
     }
-
-//    @Override
-//    public void onBindViewHolder(@NonNull App_ViewHolder holder, int position)
-//    {
-//
-//    }
 
     @Override
     public int getItemCount() {
@@ -55,13 +47,12 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.So
     public class SoftView_Holder extends RecyclerView.ViewHolder
     {
         public TextView app_name;
-        public ImageView app_image,app_icon;
+        public ImageView app_image;
         public SoftView_Holder(@NonNull View itemView) {
             super(itemView);
 
-            app_name = itemView.findViewById(R.id.app_name);
-            app_image = itemView.findViewById(R.id.app_Image);
-            app_icon = itemView.findViewById(R.id.app_icon);
+            app_name = itemView.findViewById(R.id.app_name_horizontal);
+            app_image = itemView.findViewById(R.id.app_image_horizontal);
         }
     }
 }

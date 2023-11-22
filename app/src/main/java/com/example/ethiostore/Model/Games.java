@@ -1,31 +1,21 @@
 package com.example.ethiostore.Model;
 
-public class Books {
+public class Games {
 
-    private String sname, date, time, image, sid, description, apkFile;
-            private String isDownloaded;
+    public String apkFile, date, time, image, sid, sname, category, description;
 
-
-    public Books() {
+    public Games() {
     }
 
-    public Books(String sname, String date, String time, String image, String sid, String description, String apkFile, String isDownloaded) {
-        this.sname = sname;
+    public Games(String apkFile, String date, String time, String image, String sid, String sname, String category, String description) {
+        this.apkFile = apkFile;
         this.date = date;
         this.time = time;
         this.image = image;
         this.sid = sid;
+        this.sname = sname;
+        this.category = category;
         this.description = description;
-        this.apkFile = apkFile;
-        this.isDownloaded = isDownloaded;
-    }
-
-    public String getIsDownloaded() {
-        return isDownloaded;
-    }
-
-    public void setIsDownloaded(String isDownloaded) {
-        this.isDownloaded = isDownloaded;
     }
 
     public String getApkFile() {
@@ -34,14 +24,6 @@ public class Books {
 
     public void setApkFile(String apkFile) {
         this.apkFile = apkFile;
-    }
-
-    public String getSname() {
-        return sname;
-    }
-
-    public void setSname(String sname) {
-        this.sname = sname;
     }
 
     public String getDate() {
@@ -74,6 +56,22 @@ public class Books {
 
     public void setSid(String sid) {
         this.sid = sid;
+    }
+
+    public String getSname() {
+        return sname;
+    }
+
+    public void setSname(String sname) {
+        this.sname = sname;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getDescription() {

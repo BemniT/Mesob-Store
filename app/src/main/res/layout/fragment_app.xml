@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".App_fragment"
+    android:background="@color/white"
     >
 
     <!-- TODO: Update blank fragment layout -->
@@ -14,6 +15,7 @@
         <!-- TODO: Update blank fragment layout -->
 
         <View
+            android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="@drawable/line"
@@ -22,7 +24,8 @@
             android:id="@+id/horizontalScrollView"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:scrollbars="none">
+            android:scrollbars="none"
+            android:background="@color/white">
 
             <LinearLayout
                 android:id="@+id/tabContainer"
@@ -85,15 +88,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Recommended for you"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="8dp"
+                    />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/Horizontal_recyclerApp"
                 android:layout_width="match_parent"
-                android:layout_height="205dp"
+                android:layout_height="210dp"
                 android:clipToPadding="false"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
                 android:scrollbars="horizontal"
-                android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+
+                />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="All app"
+                    android:layout_below="@id/Horizontal_recyclerApp"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="20dp"
+                    />
 
             <!-- Vertical RecyclerView -->
             <androidx.recyclerview.widget.RecyclerView
@@ -101,28 +127,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/Horizontal_recyclerApp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginBottom="77dp"
                 android:padding="16dp"/>
             </RelativeLayout>
 
-            <!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/Horizontal_recyclerApp"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="150dp"-->
-<!--                android:layout_marginBottom="77dp"-->
-<!--                android:scrollbars="horizontal"-->
-
-<!--                >-->
-<!--            </androidx.recyclerview.widget.RecyclerView>-->
-
-<!--                <androidx.recyclerview.widget.RecyclerView-->
-<!--                    android:id="@+id/Vertical_recycler_app"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="370dp"-->
-<!--                    android:layout_marginBottom="77dp"-->
-<!--                    android:layout_marginTop="200dp"></androidx.recyclerview.widget.RecyclerView>-->
-<!--            </RelativeLayout>-->
 
         </androidx.core.widget.NestedScrollView>
 

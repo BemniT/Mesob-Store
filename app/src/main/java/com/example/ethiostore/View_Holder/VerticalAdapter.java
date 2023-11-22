@@ -54,9 +54,9 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Vertic
             super(itemView);
 
 
-            app_name = itemView.findViewById(R.id.app_name);
-            app_image = itemView.findViewById(R.id.app_Image);
-            app_size = itemView.findViewById(R.id.app_size);
+            app_name = itemView.findViewById(R.id.app_name_vertical);
+            app_image = itemView.findViewById(R.id.app_Image_vertical);
+            app_size = itemView.findViewById(R.id.app_size_vertical);
         }
     }
 }

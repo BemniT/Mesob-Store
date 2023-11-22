@@ -47,6 +47,11 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
+import io.paperdb.Book;
 
 public class Software_Detail_Activity extends AppCompatActivity {
 
@@ -56,22 +61,10 @@ public class Software_Detail_Activity extends AppCompatActivity {
 
     private static final String CHANNEL_ID = "download_channel";
     private static final int NOTIFICATION_ID = 1;
-    private boolean isDownloaded = false;
+    private String isDownloaded;
     private String fileName;
     int currentProgress;
     private ProgressDialog progressDialog;
-    private boolean isFileDownloaded() {
-        SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
-        return preferences.getBoolean("isDownloaded", false);
-    }
-
-    private void setFileDownloaded(boolean isDownloaded) {
-        SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("isDownloaded", isDownloaded);
-        editor.apply();
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +80,23 @@ public class Software_Detail_Activity extends AppCompatActivity {
         bookBack = (ImageView) findViewById(R.id.book_backBtn);
         bookDownload = (Button) findViewById(R.id.book_download);
 
-        isDownloaded = isFileDownloaded();
+        String id = getIntent().getStringExtra("sid").toString();
+        DatabaseReference bookRef = FirebaseDatabase.getInstance().getReference().child("Books").child(id);
+        bookRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot)
+            {
+                Books books = snapshot.getValue(Books.class);
+                isDownloaded = books.getIsDownloaded();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
 
 
         bookBack.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +111,7 @@ public class Software_Detail_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 String id = getIntent().getStringExtra("sid").toString();
 
-                if (!isDownloaded)
+                if (isDownloaded.equals("false"))
                 {
                     DatabaseReference bookRef;
                     bookRef = FirebaseDatabase.getInstance().getReference().child("Books");
@@ -115,6 +124,8 @@ public class Software_Detail_Activity extends AppCompatActivity {
                             String fileUrl = books.getApkFile().toString();
                              fileName = books.getSname().toString();
                             DownloadPDF(fileUrl, fileName);
+
+
                         }
 
                         @Override
@@ -122,19 +133,19 @@ public class Software_Detail_Activity extends AppCompatActivity {
 
                         }
                     });
-                }else {
+                }else if (isDownloaded.equals("true")) {
+                    bookDownload.setText("Open");
                     openDownloadedFile(new File(getExternalFilesDir(null), "Download_EthioStore/" + fileName + ".pdf"));
                 }
                 }
 
         });
 
-        String id = getIntent().getStringExtra("sid").toString();
 
-        DatabaseReference bookRef;
-        bookRef = FirebaseDatabase.getInstance().getReference().child("Books");
+        DatabaseReference bookRef1;
+        bookRef1 = FirebaseDatabase.getInstance().getReference().child("Books");
 
-        bookRef.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+        bookRef1.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Books books = snapshot.getValue(Books.class);
@@ -195,9 +206,8 @@ public class Software_Detail_Activity extends AppCompatActivity {
                         @Override
                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                             showNotification("Download Complete", "File has been downloaded successfully", loaclFile);
-                            updateDownloadBtn();
-                            isDownloaded = true;
-                            setFileDownloaded(true);
+                           bookDownload.setText("Open");
+                           setIsDownloadedTrue();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -220,13 +230,6 @@ public class Software_Detail_Activity extends AppCompatActivity {
 
     }
 
-    private void updateDownloadBtn()
-    {
-        if (isDownloaded == true)
-        {
-            bookDownload.setText("Open");
-        }
-    }
 
 
     private void showNotification(String title, String message,File directory) {
@@ -295,4 +298,25 @@ public class Software_Detail_Activity extends AppCompatActivity {
 
 
     }
+
+    private void setIsDownloadedTrue() {
+
+        String id = getIntent().getStringExtra("sid").toString();
+        DatabaseReference bookRef = FirebaseDatabase.getInstance().getReference().child("Books").child(id);
+
+
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("isDownloaded", "true");
+
+// Update the specific node with the new values
+        bookRef.updateChildren(updates)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(Software_Detail_Activity.this, "Is downloaded is set to true", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
 }

@@ -5,10 +5,135 @@
     android:layout_height="match_parent"
     tools:context=".Game_Fragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+        <!-- TODO: Update blank fragment layout -->
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/line"
+            android:layout_below="@id/horizontalScrollView"/>
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:scrollbars="none"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:id="@+id/tabContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                >
+
+                <TextView
+                    android:id="@+id/app_foryou"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="For you"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/top_text"
+                    />
+
+                <TextView
+                    android:id="@+id/app_top_chart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Top Charts"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/top_text"
+                    android:paddingLeft="30dp"/>
+
+                <TextView
+                    android:id="@+id/new_chart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/top_text"
+                    android:paddingLeft="30dp"/>
+                <TextView
+                    android:id="@+id/app_categories_chart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Categoies"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/top_text"
+                    android:paddingLeft="30dp"/>
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scrollerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/horizontalScrollView"
+            android:layout_marginTop="5dp"
+            android:scrollbars="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Recommended for you"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="8dp"
+                    />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/Horizontal_recyclerGame"
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp"
+                    android:clipToPadding="false"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="6dp"
+                    android:scrollbars="horizontal"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="40dp"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="All Games"
+                    android:layout_below="@id/Horizontal_recyclerGame"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="20dp"
+                    />
+
+                <!-- Vertical RecyclerView -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/Vertical_recyclerGame"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Horizontal_recyclerGame"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="77dp"
+                    android:padding="16dp"/>
+            </RelativeLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+
+    </RelativeLayout>
+
 
 </FrameLayout>

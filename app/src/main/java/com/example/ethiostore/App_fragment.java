@@ -75,8 +75,6 @@ public class App_fragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-
-
         fetchHorizontalData();
         fetchVerticalData();
     }
@@ -89,7 +87,6 @@ public class App_fragment extends Fragment {
 
 
          horizontalRecyclerView = view.findViewById(R.id.Horizontal_recyclerApp);
-        // horizontalRecyclerView.setNestedScrollingEnabled(false);
          verticalRecyclerView = view.findViewById(R.id.Vertical_recycler_app);
 //        forYou = forYou.findViewById(R.id.app_foryou);
 //        Top = Top.findViewById(R.id.app_top_chart);
@@ -138,7 +135,7 @@ public class App_fragment extends Fragment {
                     verticalItems.add(apps);
                 }
                 VerticalAdapter verticalAdapter = new VerticalAdapter(verticalItems) ;
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),1);
                 verticalRecyclerView.setLayoutManager(gridLayoutManager);
                 verticalRecyclerView.setAdapter(verticalAdapter);
             }

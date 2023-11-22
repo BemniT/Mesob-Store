@@ -23,8 +23,8 @@ public class App_ViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     public App_ViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        app_name = itemView.findViewById(R.id.app_name);
-        app_image = itemView.findViewById(R.id.app_Image);
+        app_name = itemView.findViewById(R.id.app_name_horizontal);
+        app_image = itemView.findViewById(R.id.app_image_horizontal);
         app_size = itemView.findViewById(R.id.app_size);
     }
 
