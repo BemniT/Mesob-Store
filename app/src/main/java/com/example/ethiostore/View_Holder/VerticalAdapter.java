@@ -1,5 +1,6 @@
 package com.example.ethiostore.View_Holder;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +20,11 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Vertic
 {
 
     private List<Apps> verticalItems;
+    private Activity appActivity;
 
-    public VerticalAdapter(List<Apps> verticalItems) {
+    public VerticalAdapter(List<Apps> verticalItems, Activity appActivity) {
         this.verticalItems = verticalItems;
+        this.appActivity = appActivity;
     }
 
     @NonNull

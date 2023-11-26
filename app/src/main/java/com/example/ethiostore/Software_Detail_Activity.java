@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -81,28 +82,13 @@ public class Software_Detail_Activity extends AppCompatActivity {
         bookDownload = (Button) findViewById(R.id.book_download);
 
         String id = getIntent().getStringExtra("sid").toString();
-        DatabaseReference bookRef = FirebaseDatabase.getInstance().getReference().child("Books").child(id);
-        bookRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot)
-            {
-                Books books = snapshot.getValue(Books.class);
-                isDownloaded = books.getIsDownloaded();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
+        getDownloadStatus();
 
 
         bookBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Software_Detail_Activity.this, Home_Activity.class);
+                Intent intent = new Intent(Software_Detail_Activity.this, BookFragment.class);
                 startActivity(intent);
             }
         });
@@ -115,17 +101,14 @@ public class Software_Detail_Activity extends AppCompatActivity {
                 {
                     DatabaseReference bookRef;
                     bookRef = FirebaseDatabase.getInstance().getReference().child("Books");
-
                     bookRef.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Books books = snapshot.getValue(Books.class);
 
                             String fileUrl = books.getApkFile().toString();
-                             fileName = books.getSname().toString();
+                            fileName = books.getSname().toString();
                             DownloadPDF(fileUrl, fileName);
-
-
                         }
 
                         @Override
@@ -140,7 +123,6 @@ public class Software_Detail_Activity extends AppCompatActivity {
                 }
 
         });
-
 
         DatabaseReference bookRef1;
         bookRef1 = FirebaseDatabase.getInstance().getReference().child("Books");
@@ -162,7 +144,31 @@ public class Software_Detail_Activity extends AppCompatActivity {
 
     }
 
+    private void getDownloadStatus(){
 
+        String id = getIntent().getStringExtra("sid").toString();
+        DatabaseReference bookRef = FirebaseDatabase.getInstance().getReference().child("Books").child(id);
+        bookRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot)
+            {
+                Books books = snapshot.getValue(Books.class);
+                isDownloaded = books.getIsDownloaded();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        if (isDownloaded == "true")
+        {
+            bookDownload.setText("Open");
+        }else{
+            bookDownload.setText("Download");
+        }
+
+    }
     private void openDownloadedFile(File file)
     {
         Uri contentUri = FileProvider.getUriForFile(this, "com.example.ethiostore.fileprovider", file);
@@ -269,13 +275,6 @@ public class Software_Detail_Activity extends AppCompatActivity {
         // Show the notification
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         notificationManager.notify(NOTIFICATION_ID, builder.build());
@@ -313,6 +312,7 @@ public class Software_Detail_Activity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        //bookDownload.setText("Open");
                         Toast.makeText(Software_Detail_Activity.this, "Is downloaded is set to true", Toast.LENGTH_SHORT).show();
                     }
                 });

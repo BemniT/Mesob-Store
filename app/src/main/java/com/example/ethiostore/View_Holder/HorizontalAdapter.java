@@ -1,5 +1,12 @@
 package com.example.ethiostore.View_Holder;
 
+
+
+
+import static com.google.android.material.internal.ContextUtils.getActivity;
+
+import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +16,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ethiostore.App_Game_DetailActivity;
+import com.example.ethiostore.App_fragment;
 import com.example.ethiostore.Model.Apps;
 import com.example.ethiostore.R;
 import com.squareup.picasso.Picasso;
@@ -19,9 +28,12 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.So
 {
 
     private List<Apps> horizontalItem;
+    private Activity AppActivity;
 
-    public HorizontalAdapter(List<Apps> horizontalItem) {
+
+    public HorizontalAdapter(List<Apps> horizontalItem,Activity appActivity) {
         this.horizontalItem = horizontalItem;
+        AppActivity = appActivity;
     }
 
     @NonNull
@@ -37,6 +49,18 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.So
         Apps apps = horizontalItem.get(position);
         holder.app_name.setText(apps.getSname());
         Picasso.get().load(apps.getImage()).into(holder.app_image);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if (AppActivity != null){
+                Intent intent = new Intent(AppActivity, App_Game_DetailActivity.class);
+                intent.putExtra("type","Apps");
+                intent.putExtra("sid",apps.getSid());
+                AppActivity.startActivity(intent);
+            }}
+        });
     }
 
     @Override

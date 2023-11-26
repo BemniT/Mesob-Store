@@ -1,9 +1,5 @@
 package com.example.ethiostore;
 
-import static java.security.AccessController.getContext;
-
-import android.content.ClipData;
-import android.media.RouteListingPreference;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,23 +15,14 @@ import android.widget.TextView;
 
 
 import com.example.ethiostore.Model.Apps;
-import com.example.ethiostore.View_Holder.App_ViewHolder;
-import com.example.ethiostore.View_Holder.Book_ViewHolder;
 import com.example.ethiostore.View_Holder.HorizontalAdapter;
 import com.example.ethiostore.View_Holder.VerticalAdapter;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
 
-import org.checkerframework.framework.qual.DefaultQualifier;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,7 +94,7 @@ public class App_fragment extends Fragment {
                     Apps apps = snapshot1.getValue(Apps.class);
                     horizontalItem.add(apps);
                 }
-                HorizontalAdapter horizontalAdapter = new HorizontalAdapter(horizontalItem);
+                HorizontalAdapter horizontalAdapter = new HorizontalAdapter(horizontalItem,  getActivity());
                 LinearLayoutManager horizontalLayoutManger = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false);
 
                 horizontalRecyclerView.setLayoutManager(horizontalLayoutManger);
@@ -134,7 +121,7 @@ public class App_fragment extends Fragment {
                     Apps apps = dataSnapshot.getValue(Apps.class);
                     verticalItems.add(apps);
                 }
-                VerticalAdapter verticalAdapter = new VerticalAdapter(verticalItems) ;
+                VerticalAdapter verticalAdapter = new VerticalAdapter(verticalItems, getActivity()) ;
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),1);
                 verticalRecyclerView.setLayoutManager(gridLayoutManager);
                 verticalRecyclerView.setAdapter(verticalAdapter);

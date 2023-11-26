@@ -2,12 +2,12 @@ package com.example.ethiostore.Model;
 
 public class Games {
 
-    public String apkFile, date, time, image, sid, sname, category, description;
+    public String apkFile, date, time, image, sid, sname, category, description, isDownloaded;
 
     public Games() {
     }
 
-    public Games(String apkFile, String date, String time, String image, String sid, String sname, String category, String description) {
+    public Games(String apkFile, String date, String time, String image, String sid, String sname, String category, String description, String isDownloaded) {
         this.apkFile = apkFile;
         this.date = date;
         this.time = time;
@@ -16,6 +16,15 @@ public class Games {
         this.sname = sname;
         this.category = category;
         this.description = description;
+        this.isDownloaded = isDownloaded;
+    }
+
+    public String getIsDownloaded() {
+        return isDownloaded;
+    }
+
+    public void setIsDownloaded(String isDownloaded) {
+        this.isDownloaded = isDownloaded;
     }
 
     public String getApkFile() {

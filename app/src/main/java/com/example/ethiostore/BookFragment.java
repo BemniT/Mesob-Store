@@ -1,6 +1,5 @@
 package com.example.ethiostore;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,28 +11,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-import com.denzcoskun.imageslider.ImageSlider;
-import com.denzcoskun.imageslider.constants.ScaleTypes;
-import com.denzcoskun.imageslider.models.SlideModel;
-import com.example.ethiostore.Interface.ItemClickListener;
 import com.example.ethiostore.Model.Books;
-import com.example.ethiostore.View_Holder.Book_ViewHolder;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.example.ethiostore.Model.Games;
+import com.example.ethiostore.View_Holder.Book_VerticalAdapter;
+import com.example.ethiostore.View_Holder.Game_HorizontalAdapter;
+import com.example.ethiostore.View_Holder.Game_VerticalAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
+import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link BookFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 
 
 public class BookFragment extends Fragment {
@@ -48,7 +40,7 @@ public class BookFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private RecyclerView recyclerView;
+    private RecyclerView horizontalRecyclerBook, verticalRecyclerBook;
     RecyclerView.LayoutManager layoutManager;
 
     private DatabaseReference bookRef;
@@ -76,7 +68,8 @@ public class BookFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-
+        fetchHorizontalData();
+        fetchVerticalData();
     }
 
     @Override
@@ -85,64 +78,65 @@ public class BookFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_book, container, false);
 
-
-        recyclerView =  view.findViewById(R.id.book_recyclerView);
-        recyclerView.setHasFixedSize(false);
-        int numberOfColumns = 2; // You can change this to the desired number of columns
-        layoutManager = new GridLayoutManager(getContext(), numberOfColumns);
-
-        recyclerView.setLayoutManager(layoutManager);
-
+        horizontalRecyclerBook = view.findViewById(R.id.Horizontal_recyclerBook);
+        verticalRecyclerBook = view.findViewById(R.id.Vertical_recycler_Book);
 
         return view;
     }
 
-
-
-    @Override
-    public void onStart()
+    private void fetchVerticalData()
     {
-        super.onStart();
+        bookRef = FirebaseDatabase.getInstance().getReference().child("Games");
 
-        bookRef = FirebaseDatabase.getInstance().getReference();
-
-        FirebaseRecyclerOptions<Books> options = new FirebaseRecyclerOptions.Builder<Books>()
-                .setQuery(bookRef.child("Books"), Books.class)
-                .build();
-
-
-        FirebaseRecyclerAdapter<Books, Book_ViewHolder> adapter = new FirebaseRecyclerAdapter<Books, Book_ViewHolder>(options) {
+       bookRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            protected void onBindViewHolder(@NonNull Book_ViewHolder holder, int position, @NonNull Books model)
+            public void onDataChange(@NonNull DataSnapshot snapshot)
             {
-                holder.book_name.setText(model.getSname());
-                Picasso.get().load(model.getImage()).into(holder.book_images);
+                List<Books> booksVerticalItems = new ArrayList<>();
 
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        Intent intent = new Intent(getActivity(), Software_Detail_Activity.class);
-                        intent.putExtra("sid", model.getSid());
-                        startActivity(intent);
-                    }
-                });
+                for (DataSnapshot dataSnapshot : snapshot.getChildren())
+                {
+                    Books books = dataSnapshot.getValue(Books.class);
+                   booksVerticalItems.add(books);
+                }
+
+                Book_VerticalAdapter bookVerticalAdapter = new Book_VerticalAdapter(booksVerticalItems);
+//                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),1);
+                verticalRecyclerBook.setLayoutManager(gridLayoutManager);
+                verticalRecyclerBook.setAdapter(bookVerticalAdapter);
             }
 
-            @NonNull
             @Override
-            public Book_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
-            {
-                View view = LayoutInflater.from(getContext()).inflate(R.layout.book_card_view, parent, false);
-                Book_ViewHolder holder = new Book_ViewHolder(view);
-                return holder;
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
-        } ;
-        recyclerView.setAdapter(adapter);
-        adapter.startListening();
-
-
+        });
 
     }
 
+    private void fetchHorizontalData() {
+        bookRef = FirebaseDatabase.getInstance().getReference().child("Games");
+        bookRef.limitToFirst(3).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Games> gameHorizontalItems = new ArrayList<>();
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Games games = dataSnapshot.getValue(Games.class);
+                    gameHorizontalItems.add(games);
+                }
+
+                Game_HorizontalAdapter gameHorizontalAdapter = new Game_HorizontalAdapter(gameHorizontalItems);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+
+                horizontalRecyclerBook.setLayoutManager(linearLayoutManager);
+                horizontalRecyclerBook.setAdapter(gameHorizontalAdapter);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 }

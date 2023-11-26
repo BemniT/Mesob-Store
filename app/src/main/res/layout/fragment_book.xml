@@ -6,11 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".BookFragment">
 
-    <TextView
-        android:layout_width="109dp"
-        android:layout_height="30dp"
-        android:layout_gravity="center"
-        android:text="Book Fragment" />
+
 
         <!-- TODO: Update blank fragment layout -->
 
@@ -19,7 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="@drawable/line"
-            android:layout_below="@id/horizontalScrollView"/>
+            android:layout_below="@id/horizontalScrollView"
+            android:layout_marginTop="40dp"/>
         <HorizontalScrollView
             android:id="@+id/horizontalScrollView"
             android:layout_width="match_parent"
@@ -80,16 +77,63 @@
 
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/book_recyclerView"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scrollerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="77dp"
-        >
+        android:layout_below="@+id/line"
+        android:layout_marginTop="45dp"
+        android:scrollbars="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recommended for you"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Horizontal_recyclerBook"
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                android:clipToPadding="false"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                android:scrollbars="horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All app"
+                android:layout_below="@id/Horizontal_recyclerBook"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginLeft="20dp"
+                />
+
+            <!-- Vertical RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Vertical_recycler_Book"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Horizontal_recyclerBook"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="77dp"
+                android:padding="16dp"/>
+        </RelativeLayout>
 
 
-    </androidx.recyclerview.widget.RecyclerView>
+    </androidx.core.widget.NestedScrollView>
 
 
 
