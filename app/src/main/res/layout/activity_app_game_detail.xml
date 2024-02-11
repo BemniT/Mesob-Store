@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Software_Detail_Activity">
+    tools:context=".Software_Detail_Activity"
+    android:background="@color/white">
 
-    <RelativeLayout
-        android:id="@+id/relative_layout2"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:background="@color/blue"
-        >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
         <ImageView
             android:id="@+id/soft_backBtn"
             android:layout_width="30dp"
@@ -19,303 +17,315 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="13dp"
             android:src="@drawable/baseline_arrow_back_24"
-            android:background="#94A9C3"
-
             />
-    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/software_image_card"
         android:layout_width="wrap_content"
-        android:layout_height="130dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="80dp"
+        android:layout_height="100dp"
         app:cardCornerRadius="20dp"
+
         >
 
         <ImageView
             android:id="@+id/software_image"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-
-            android:background="@color/white"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
 
             />
     </androidx.cardview.widget.CardView>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_toRightOf="@id/software_image_card"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="35dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            >
 
         <TextView
             android:id="@+id/software_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:text=""
-            android:textSize="23sp"
+            android:textSize="15sp"
             android:textStyle="bold"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             />
 
         <TextView
             android:id="@+id/software_categories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:text=""
+            android:layout_marginTop="10dp"
             android:textSize="10dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             />
+
+            <TextView
+                android:id="@+id/software_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Free"
+                android:layout_marginTop="10dp"
+                android:textSize="10dp"
+                android:textColor="@color/black"
+                />
+        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/container1"
+
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/relative_layout2"
+        android:layout_height="40dp"
+        android:scrollbars="none"
+        android:layout_below="@id/linear1"
         android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
+        android:background="@color/white"
         >
 
-
-
-
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/middle_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/container1"
-        android:layout_marginTop="15dp"
-        >
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/middle_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_below="@+id/container1"
+            android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_marginStart="5dp"
+            android:weightSum="7"
             >
-            <TextView
-                android:id="@+id/software_rating"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
-                android:textSize="13dp"
-                android:text="4.5"
-                android:layout_gravity="center"
-                />
+                android:orientation="vertical"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                >
+                <ImageView
+                    android:id="@+id/image_like"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/seletor_likebtn"
+                    android:layout_gravity="center"
+                    >
 
+                </ImageView>
+                <TextView
+                    android:id="@+id/content_like"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Like"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/top_text"
+                    android:layout_gravity="center"
+                    />
+
+            </LinearLayout>
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:orientation="vertical"
+               android:paddingLeft="20dp"
+               android:paddingRight="20dp"
+               >
+               <ImageView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/downloadicon"
+                   android:layout_gravity="center"
+                   >
+
+               </ImageView>
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/app_size"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="10dp"
-                android:text="Rating"
-                android:layout_gravity="center"
-                />
-
+                android:text="Size"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/top_text"
+                android:layout_gravity="center"/>
         </LinearLayout>
 
-        <View
-            android:id="@+id/line"
-            android:layout_width="2dp"
-            android:layout_height="40dp"
-            android:background="@drawable/line"
-            android:layout_gravity="center"
-            android:layout_marginTop="7dp"/>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_below="@+id/container1"
-            >
-            <TextView
-                android:id="@+id/software_size"
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
-                android:textSize="13dp"
-                android:text="250"
-                android:layout_gravity="center"
-                />
-
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                >
+                <TextView
+                    android:id="@+id/num_download"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="500K+"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="3dp"
+                    />
             <TextView
+                android:id="@+id/new_chart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="10dp"
-                android:text="Pages"
-                android:layout_gravity="center"
-                />
+                android:text="Downloads"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/top_text"
 
+                />
+            </LinearLayout>
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                >
+                <ImageView
+                    android:id="@+id/image_saved"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/downloadicon"
+                    >
+                </ImageView>
+            <TextView
+                android:id="@+id/app_categories_chart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/top_text" />
         </LinearLayout>
-
-        <View
-            android:id="@+id/line2"
-            android:layout_width="2dp"
-            android:layout_height="40dp"
-            android:background="@drawable/line"
-            android:layout_gravity="center"
-            android:layout_marginTop="7dp"/>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_below="@+id/container1"
-            >
-            <TextView
-                android:id="@+id/software_numDownload"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
-                android:textSize="13dp"
-                android:text="24,512"
-                android:layout_gravity="center"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="10dp"
-                android:text="Likes"
-                android:layout_gravity="center"
-                />
-
         </LinearLayout>
-
-
-
-
-    </LinearLayout>
-
-
+    </HorizontalScrollView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/book_download_card"
+        android:id="@+id/content_download_card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/middle_container"
+        android:layout_below="@id/horizontalScrollView"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         app:cardCornerRadius="17dp"
         >
 
-        <Button
+        <ImageButton
             android:id="@+id/software_download"
-            android:layout_width="350dp"
-            android:layout_height="45dp"
-            android:background="@color/button"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
             android:text="Install"
             android:textSize="20sp"
+            android:theme="@style/Button"
             android:layout_centerHorizontal="true"
+            android:background="@drawable/downloadbtn"
 
 
             />
 </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/about_this_game"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="About this game"
-        android:layout_below="@+id/book_download_card"
-        />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/software_image_slider"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_below="@id/about_this_game"
-        android:layout_marginTop="10dp"
+        android:clipToPadding="false"
+        android:paddingStart="6dp"
+        android:paddingEnd="6dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="@color/back"
+        android:visibility="visible"
+        android:layout_below="@+id/content_download_card"
+        />
+    <TextView
+        android:id="@+id/about_this_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="About this content"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/software_image_slider"
+        />
+    <TextView
+        android:layout_marginStart="20dp"
+        android:id="@+id/software_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:text="Description"
+        android:layout_gravity="center"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/about_this_game"
         />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/software_image_slider"
+    <TextView
+        android:id="@+id/rate_and_reviews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reviews"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
-        android:background="#4DD6D2D2"
-        >
+        android:layout_below="@+id/software_description"
+        />
 
-        <LinearLayout
-            android:id="@id/lower_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+    <EditText
+        android:id="@+id/comment_input"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rate_and_reviews"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:hint="Write a comment..."
+        android:padding="10dp" />
 
-            >
+    <ImageButton
+        android:id="@+id/submit_comment_btn"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:text="Submit"
+        android:layout_toRightOf="@+id/comment_input"
+        android:layout_below="@id/rate_and_reviews"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/send"
+        />
 
-            <TextView
-                android:layout_marginStart="20dp"
-                android:id="@+id/software_descriptionBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="Description"
-                android:layout_gravity="center"
-                />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/comments_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/submit_comment_btn"
+        android:layout_marginTop="10dp" />
 
-            <TextView
-                android:id="@+id/software_reviewBtn"
-                android:layout_marginStart="60dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="Review"
-                android:layout_gravity="center"
-                />
-
-            <TextView
-                android:layout_marginStart="70dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="Review"
-                android:layout_gravity="center"
-                />
-
-
-        </LinearLayout>
-
-        <View
-            android:id="@+id/line3"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@drawable/line"
-            android:layout_gravity="center"
-            android:layout_marginTop="4dp"
-            android:layout_below="@+id/lower_container"/>
-
-
-        <TextView
-            android:layout_marginStart="20dp"
-            android:id="@+id/software_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:text="Description"
-            android:layout_gravity="center"
-            android:layout_below="@id/line3"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="15dp"
-            />
-
-    </RelativeLayout>
 
 
 </RelativeLayout>
+</androidx.core.widget.NestedScrollView>

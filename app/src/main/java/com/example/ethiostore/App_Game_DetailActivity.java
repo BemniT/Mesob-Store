@@ -1,11 +1,14 @@
 package com.example.ethiostore;
 
+import static java.security.AccessController.getContext;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.NotificationChannel;
@@ -22,15 +25,23 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ethiostore.Model.Apps;
 import com.example.ethiostore.Model.Books;
+import com.example.ethiostore.Model.Comment;
 import com.example.ethiostore.Model.Games;
+import com.example.ethiostore.Prevalent.Continity;
+import com.example.ethiostore.View_Holder.Book_VerticalAdapter;
+import com.example.ethiostore.View_Holder.CommentAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,18 +53,27 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+
+
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class App_Game_DetailActivity extends AppCompatActivity {
 
     private TextView softwareName, softwareCategories, softwareDescription,
-            softwareRating, softwareSize, softwareNumDownload, softwareDescriptionBtn, softwareReviewBtn;
-    private ImageView softwareImage, softwareBack;
-    private Button softwareInstall;
-    private RecyclerView image_slider;
-
+            contentLike, softwareSize, softwareNumDownload, softwareDescriptionBtn, softwareReviewBtn;
+    private ImageView softwareImage, softwareBack, image_like;
+    private ImageButton softwareInstall, comment_sendBtn;
+    private EditText comment_area;
+    private RecyclerView image_slider, commentsRecyclerView;
+    private CommentAdapter commentAdapter;
+    private List<Comment> commentList;
     private static final String CHANNEL_ID = "download_channel";
     private static final int NOTIFICATION_ID = 1;
     private String isDownloaded;
@@ -61,6 +81,11 @@ public class App_Game_DetailActivity extends AppCompatActivity {
     int currentProgress;
     private ProgressDialog progressDialog;
     private String Sid, type;
+    private int likeCount = 0;
+    private DatabaseReference userLikesRef;
+    private DatabaseReference commentsRef, commentData;
+
+
 
 
     @Override
@@ -68,24 +93,57 @@ public class App_Game_DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_game_detail);
 
+
         softwareName = (TextView) findViewById(R.id.software_name);
         softwareCategories = (TextView) findViewById(R.id.software_categories);
-        softwareSize = (TextView) findViewById(R.id.software_size);
+        //softwareSize = (TextView) findViewById(R.id.software_size);
         softwareDescription = (TextView) findViewById(R.id.software_description);
-        softwareRating = (TextView) findViewById(R.id.software_rating);
-        softwareNumDownload = (TextView) findViewById(R.id.software_numDownload);
-        softwareDescriptionBtn = (TextView) findViewById(R.id.software_descriptionBtn);
-        softwareReviewBtn = (TextView) findViewById(R.id.software_reviewBtn);
+        contentLike = (TextView) findViewById(R.id.content_like);
+        // softwareNumDownload = (TextView) findViewById(R.id.software_numDownload);
+        //softwareDescriptionBtn = (TextView) findViewById(R.id.software_descriptionBtn);
+        // softwareReviewBtn = (TextView) findViewById(R.id.software_reviewBtn);
 
-        softwareInstall = (Button) findViewById(R.id.software_download);
+        softwareInstall = (ImageButton) findViewById(R.id.software_download);
         softwareImage = (ImageView) findViewById(R.id.software_image);
+        softwareBack = (ImageView) findViewById(R.id.soft_backBtn);
+        image_like = (ImageView) findViewById(R.id.image_like);
+        comment_sendBtn = (ImageButton) findViewById(R.id.submit_comment_btn);
+        comment_area = (EditText) findViewById(R.id.comment_input);
 
         image_slider = (RecyclerView) findViewById(R.id.software_image_slider);
+        commentsRecyclerView = findViewById(R.id.comments_recycler_view);
 
-         type = getIntent().getStringExtra("type").toString();
-         Sid = getIntent().getStringExtra("sid").toString();
 
+
+
+        type = getIntent().getStringExtra("type").toString();
+        Sid = getIntent().getStringExtra("sid").toString();
+        String userId = Continity.currentOnlineUser.getPhone();
+        commentsRef = FirebaseDatabase.getInstance().getReference().child("Comments")
+                .child(Sid).child(userId);
+        commentData = FirebaseDatabase.getInstance().getReference().child("Comments").child(Sid);
+        userLikesRef = FirebaseDatabase.getInstance().getReference().child("UserLikes")
+                .child(Continity.currentOnlineUser.getPhone()).child(Sid);
+        userLikesRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    boolean isLiked = snapshot.getValue(Boolean.class);
+                    image_like.setSelected(isLiked);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(App_Game_DetailActivity.this, "Failed to retrieve like status", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // METHOD CALLS ARE HERE
+        getInitialLikeCount();
         getDownloadStatus();
+        fetchCommentInfo();
+        contentLike.setText(String.valueOf(likeCount));
 
         if (type.equals("Apps"))
         {
@@ -93,12 +151,139 @@ public class App_Game_DetailActivity extends AppCompatActivity {
         } else if (type.equals("Games")) {
             fetchGamesDataToDisplay();
         }else {
-
         }
+
+        image_like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setSelected(!v.isSelected());
+                boolean isLiked = v.isSelected();
+
+                // Update the user's like status in the database
+                userLikesRef.setValue(isLiked)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                if (isLiked) {
+                                    likeCount++;
+                                } else {
+                                    likeCount--;
+                                }
+                                updateLikeCountInDatabase(likeCount);
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                            }
+                        });
+            }
+        });
+
+        softwareBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(App_Game_DetailActivity.this, Home_Activity.class);
+                startActivity(intent);
+            }
+        });
+
+        comment_sendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String commentText = comment_area.getText().toString().trim();
+                saveCommentToDatabase(commentText);
+            }
+        });
 
 
     }
 
+    private void fetchCommentInfo() {
+
+        commentData.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Comment> booksVerticalItems = new ArrayList<>();
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Comment comment = dataSnapshot.getValue(Comment.class);
+                    booksVerticalItems.add(comment);
+                }
+
+                CommentAdapter commentAdapter = new CommentAdapter(booksVerticalItems);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(App_Game_DetailActivity.this);
+                commentsRecyclerView.setLayoutManager(linearLayoutManager);
+                commentsRecyclerView.setAdapter(commentAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void saveCommentToDatabase(String commentText) {
+
+        String userName = Continity.currentOnlineUser.getName();
+        String data_time;
+        SimpleDateFormat time = new SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault());
+        data_time = time.format(new Date());
+
+
+        // Create a new Comment object
+
+        HashMap<String, Object> commentData = new HashMap<>();
+        commentData.put("userName",userName);
+        commentData.put("comment", commentText);
+        commentData.put("timestamp",data_time);
+        commentsRef.updateChildren(commentData).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isComplete())
+                {
+                    comment_area.setText("");
+                    fetchCommentInfo();
+                }
+            }
+        });
+    }
+
+    private void getInitialLikeCount() {
+        DatabaseReference likesRef = FirebaseDatabase.getInstance().getReference().child("Likes").child(Sid);
+        likesRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    likeCount = snapshot.getValue(Integer.class);
+                    contentLike.setText(String.valueOf(likeCount));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    private void updateLikeCountInDatabase(int likeCount)
+    {
+        DatabaseReference likesRef = FirebaseDatabase.getInstance().getReference().child("Likes").child(Sid);
+        likesRef.setValue(likeCount)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+    }
 
 
     private void getDownloadStatus()
@@ -177,11 +362,12 @@ public class App_Game_DetailActivity extends AppCompatActivity {
                         }
                     });
                 }else if (isDownloaded.equals("true")) {
-                    softwareInstall.setText("Open");
+                   // softwareInstall.setText("Open");
                     openDownloadedFile(new File(getExternalFilesDir(null), "Download_EthioStore/" + fileName + ".apk"));
                 }
             }
         });
+
 
 
     }
@@ -234,7 +420,7 @@ public class App_Game_DetailActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                            // showNotification("Download Complete", "File has been downloaded successfully", loaclFile);
-                            softwareInstall.setText("Open");
+                            //softwareInstall.setText("Open");
                             setIsDownloadedTrue();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -344,6 +530,7 @@ public class App_Game_DetailActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
 //    private void showNotification(String title, String message,File directory) {

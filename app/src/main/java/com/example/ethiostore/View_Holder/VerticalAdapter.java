@@ -1,18 +1,25 @@
 package com.example.ethiostore.View_Holder;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ethiostore.App_Game_DetailActivity;
 import com.example.ethiostore.Model.Apps;
 import com.example.ethiostore.R;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.List;
 
@@ -41,8 +48,22 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Vertic
     {
         Apps apps = verticalItems.get(position);
         holder.app_name.setText(apps.getSname());
-        Picasso.get().load(apps.getImage()).into(holder.app_image);
+        holder.loadAndResizeImage(apps.getImage());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if (appActivity != null){
+                    Intent intent = new Intent(appActivity, App_Game_DetailActivity.class);
+                    intent.putExtra("type","Apps");
+                    intent.putExtra("sid",apps.getSid());
+                    appActivity.startActivity(intent);
+                }
+            }
+        });
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -61,5 +82,17 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Vertic
             app_image = itemView.findViewById(R.id.app_Image_vertical);
             app_size = itemView.findViewById(R.id.app_size_vertical);
         }
+
+        public void loadAndResizeImage(String imageUrl) {
+            Log.d("ImageURL", imageUrl);
+           // Picasso.get().setIndicatorsEnabled(true);
+            // Use Picasso to load the image and resize it to fit within the ImageView bounds
+            Picasso.get().load(imageUrl)
+                    .resize(140,140)
+                    .centerCrop()
+                    .into(app_image);
+        }
     }
+
+
 }

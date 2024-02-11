@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.ethiostore.Model.Books;
 import com.example.ethiostore.Model.Games;
+import com.example.ethiostore.View_Holder.Book_HorizontalAdapter;
 import com.example.ethiostore.View_Holder.Book_VerticalAdapter;
 import com.example.ethiostore.View_Holder.Game_HorizontalAdapter;
 import com.example.ethiostore.View_Holder.Game_VerticalAdapter;
@@ -86,7 +87,7 @@ public class BookFragment extends Fragment {
 
     private void fetchVerticalData()
     {
-        bookRef = FirebaseDatabase.getInstance().getReference().child("Games");
+        bookRef = FirebaseDatabase.getInstance().getReference().child("Books");
 
        bookRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -100,10 +101,9 @@ public class BookFragment extends Fragment {
                    booksVerticalItems.add(books);
                 }
 
-                Book_VerticalAdapter bookVerticalAdapter = new Book_VerticalAdapter(booksVerticalItems);
-//                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),1);
-                verticalRecyclerBook.setLayoutManager(gridLayoutManager);
+                Book_VerticalAdapter bookVerticalAdapter = new Book_VerticalAdapter(booksVerticalItems, getActivity());
+                LinearLayoutManager  linearLayoutManager = new LinearLayoutManager(getContext());
+                verticalRecyclerBook.setLayoutManager(linearLayoutManager);
                 verticalRecyclerBook.setAdapter(bookVerticalAdapter);
             }
 
@@ -116,22 +116,22 @@ public class BookFragment extends Fragment {
     }
 
     private void fetchHorizontalData() {
-        bookRef = FirebaseDatabase.getInstance().getReference().child("Games");
+        bookRef = FirebaseDatabase.getInstance().getReference().child("Books");
         bookRef.limitToFirst(3).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<Games> gameHorizontalItems = new ArrayList<>();
+                List<Books> bookHorizontalItems = new ArrayList<>();
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Games games = dataSnapshot.getValue(Games.class);
-                    gameHorizontalItems.add(games);
+                    Books books = dataSnapshot.getValue(Books.class);
+                    bookHorizontalItems.add(books);
                 }
 
-                Game_HorizontalAdapter gameHorizontalAdapter = new Game_HorizontalAdapter(gameHorizontalItems);
+                Book_HorizontalAdapter bookHorizontalAdapter = new Book_HorizontalAdapter(bookHorizontalItems, getActivity());
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
                 horizontalRecyclerBook.setLayoutManager(linearLayoutManager);
-                horizontalRecyclerBook.setAdapter(gameHorizontalAdapter);
+                horizontalRecyclerBook.setAdapter(bookHorizontalAdapter);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

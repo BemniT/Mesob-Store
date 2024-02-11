@@ -94,7 +94,7 @@ public class Game_Fragment extends Fragment {
                     gameHorizontalItems.add(games);
                 }
 
-                Game_HorizontalAdapter gameHorizontalAdapter = new Game_HorizontalAdapter(gameHorizontalItems);
+                Game_HorizontalAdapter gameHorizontalAdapter = new Game_HorizontalAdapter(gameHorizontalItems, getActivity());
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
                 HorizontalRecyclerGame.setLayoutManager(linearLayoutManager);
@@ -125,7 +125,7 @@ public class Game_Fragment extends Fragment {
                     gameVerticalItems.add(games);
                 }
 
-                Game_VerticalAdapter gameVerticalAdapter = new Game_VerticalAdapter(gameVerticalItems);
+                Game_VerticalAdapter gameVerticalAdapter = new Game_VerticalAdapter(gameVerticalItems, getActivity());
 //                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),1);
                 verticalRecyclerGame.setLayoutManager(gridLayoutManager);

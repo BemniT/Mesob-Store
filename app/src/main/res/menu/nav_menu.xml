@@ -5,14 +5,26 @@
     tools:showIn = "navigation_view"
     >
 
-    <group
-        android:checkableBehavior="single">
 
+<item android:title=""
+    >
+        <menu>
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/profile"
-            android:title="Home"/>
-
+            android:title="Home"
+            /></menu>
+</item>
+<group
+    android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_download"
+        android:icon="@drawable/baseline_download_24"
+        android:title="Download"/>
+    <item
+        android:id="@+id/nav_saved"
+        android:icon="@drawable/baseline_save_24"
+        android:title="Saved"/>
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/setting"

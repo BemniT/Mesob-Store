@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="133dp"
-    android:layout_height="180dp"
+    android:layout_width="100dp"
+    android:layout_height="150dp"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#57B5ABAB"
+    android:background="@color/white"
     android:layout_marginLeft="15dp"
     >
 
@@ -13,12 +13,13 @@
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp">
+            app:cardCornerRadius="25dp">
         <ImageView
             android:id="@+id/app_image_horizontal"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:padding="5dp"
+            android:scaleType="center"
             />
     </androidx.cardview.widget.CardView>
 
@@ -27,9 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="App name"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginTop="4dp"
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"
             android:layout_marginLeft="15dp"
             />
 
@@ -37,8 +37,9 @@
             android:id="@+id/app_rating_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="4.5"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:layout_marginLeft="15dp"
             />
 

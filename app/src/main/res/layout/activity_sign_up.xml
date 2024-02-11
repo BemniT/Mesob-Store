@@ -62,14 +62,14 @@
         />
 
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/letsStart"
         android:layout_marginTop="44.5dp"
-        android:layout_marginRight="-100dp"
+        android:layout_marginRight="-103dp"
         android:layout_toLeftOf="@+id/register_username"
-        android:background="@drawable/email" />
+        android:background="@drawable/user" />
 
 
 
@@ -132,7 +132,7 @@
         android:layout_marginTop="15.5dp"
         android:layout_marginRight="-100dp"
         android:layout_toLeftOf="@+id/register_phonenumber"
-        android:background="@drawable/password" />
+        android:background="@drawable/pass" />
 
     <EditText
         android:id="@+id/register_Confirmpassword"
@@ -162,7 +162,7 @@
         android:layout_marginTop="15.5dp"
         android:layout_marginRight="-100dp"
         android:layout_toLeftOf="@+id/register_phonenumber"
-        android:background="@drawable/password" />
+        android:background="@drawable/pass" />
 
     <ImageButton
         android:id="@+id/register_btn"
@@ -199,7 +199,7 @@
         android:layout_below="@+id/register_btn"
         android:layout_marginLeft="240dp"
         android:textSize="17sp"
-        android:textColor="@color/blue"
+        android:textColor="@color/base"
         android:layout_marginTop="25dp"
         android:textStyle="bold"
         />

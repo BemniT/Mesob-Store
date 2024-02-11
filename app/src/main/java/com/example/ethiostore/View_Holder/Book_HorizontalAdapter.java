@@ -1,5 +1,7 @@
 package com.example.ethiostore.View_Holder;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ethiostore.App_Game_DetailActivity;
 import com.example.ethiostore.Model.Books;
 import com.example.ethiostore.R;
+import com.example.ethiostore.Software_Detail_Activity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -18,6 +22,13 @@ import java.util.List;
 public class Book_HorizontalAdapter extends RecyclerView.Adapter<Book_HorizontalAdapter.ViewHolder>
 {
     private List<Books> horizontalItems;
+    private Activity bookActivity;
+
+    public Book_HorizontalAdapter(List<Books> horizontalItems, Activity bookActivity) {
+        this.horizontalItems = horizontalItems;
+        this.bookActivity = bookActivity;
+    }
+
     @NonNull
     @Override
     public Book_HorizontalAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -31,7 +42,23 @@ public class Book_HorizontalAdapter extends RecyclerView.Adapter<Book_Horizontal
     {
         Books books = horizontalItems.get(position);
         holder.boo_name.setText(books.getSname());
-        Picasso.get().load(books.getImage()).into(holder.book_image);
+        Picasso.get().load(books.getImage())
+                .resize(270, 380)
+                .into(holder.book_image);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if (bookActivity != null)
+                {
+
+                        Intent intent = new Intent(bookActivity, Software_Detail_Activity.class);
+                        intent.putExtra("sid",books.getSid());
+                        bookActivity.startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override

@@ -48,7 +48,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.So
     public void onBindViewHolder(@NonNull SoftView_Holder holder, int position) {
         Apps apps = horizontalItem.get(position);
         holder.app_name.setText(apps.getSname());
-        Picasso.get().load(apps.getImage()).into(holder.app_image);
+        Picasso.get().load(apps.getImage()).resize(200,200).into(holder.app_image);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

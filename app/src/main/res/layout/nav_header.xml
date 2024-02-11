@@ -3,31 +3,32 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="210dp"
+    android:layout_height="220dp"
     android:gravity="bottom"
     android:padding="16dp"
-    android:background="@color/sky"
+    android:background="@color/lavendar"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/aklogo"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="40dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Android Knowledge"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="15dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="contact@androidknowledge.com"
-        android:textColor="@color/white"
+        android:textColor="#403C3C"
         android:textSize="14sp"
         android:layout_marginBottom="16dp"/>
 

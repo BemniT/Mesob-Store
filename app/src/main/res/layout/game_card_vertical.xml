@@ -9,16 +9,15 @@
     android:orientation="horizontal">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="110dp"
-        android:layout_height="wrap_content"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         app:cardCornerRadius="20dp">
 
         <ImageView
             android:id="@+id/game_Image_vertical"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="90dp"
             android:scaleType="center"
-            android:layout_marginTop="2dp"
             />
     </androidx.cardview.widget.CardView>
 

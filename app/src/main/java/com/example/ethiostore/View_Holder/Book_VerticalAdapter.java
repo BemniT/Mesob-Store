@@ -1,5 +1,7 @@
 package com.example.ethiostore.View_Holder;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ethiostore.Model.Books;
 import com.example.ethiostore.Model.Games;
 import com.example.ethiostore.R;
+import com.example.ethiostore.Software_Detail_Activity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -20,9 +23,11 @@ public class Book_VerticalAdapter extends RecyclerView.Adapter<Book_VerticalAdap
 {
 
     private List<Books> verticalItems;
+    private Activity bookActivity;
 
-    public Book_VerticalAdapter(List<Books> verticalItems) {
+    public Book_VerticalAdapter(List<Books> verticalItems, Activity bookActivity) {
         this.verticalItems = verticalItems;
+        this.bookActivity = bookActivity;
     }
 
     @NonNull
@@ -38,7 +43,22 @@ public class Book_VerticalAdapter extends RecyclerView.Adapter<Book_VerticalAdap
     {
         Books books = verticalItems.get(position);
         holder.book_name.setText(books.getSname());
-        Picasso.get().load(books.getImage()).into(holder.book_image);
+        Picasso.get().load(books.getImage())
+                .resize(230, 300)
+                .into(holder.book_image);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if (bookActivity != null)
+                {
+                    Intent intent = new Intent(bookActivity, Software_Detail_Activity.class);
+                    intent.putExtra("sid", books.getSid());
+                    bookActivity.startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override

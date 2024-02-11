@@ -1,5 +1,7 @@
 package com.example.ethiostore.View_Holder;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ethiostore.App_Game_DetailActivity;
 import com.example.ethiostore.Model.Games;
 import com.example.ethiostore.R;
 import com.squareup.picasso.Picasso;
@@ -18,9 +21,11 @@ import java.util.List;
 public class Game_HorizontalAdapter extends RecyclerView.Adapter<Game_HorizontalAdapter.ViewHolder>
 {
     private List<Games> horizontalItems;
+    private Activity gameActivity;
 
-    public Game_HorizontalAdapter(List<Games> horizontalItems) {
+    public Game_HorizontalAdapter(List<Games> horizontalItems, Activity gameActivity) {
         this.horizontalItems = horizontalItems;
+        this.gameActivity = gameActivity;
     }
 
     @NonNull
@@ -37,8 +42,26 @@ public class Game_HorizontalAdapter extends RecyclerView.Adapter<Game_Horizontal
 
         Games games = horizontalItems.get(position);
         holder.game_name.setText(games.getSname());
-        Picasso.get().load(games.getImage()).into(holder.game_image);
-        Picasso.get().load(games.getImage()).into(holder.game_icon);
+        Picasso.get().load(games.getImage())
+                .resize(500,250)
+                .into(holder.game_image);
+        Picasso.get().load(games.getIcon())
+                .resize(130,130)
+                .into(holder.game_icon);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if (gameActivity != null)
+                {
+                    Intent intent = new Intent(gameActivity, App_Game_DetailActivity.class);
+                    intent.putExtra("sid",games.getSid());
+                    intent.putExtra("type","Games");
+                    gameActivity.startActivity(intent);
+                }
+            }
+        });
 
     }
 

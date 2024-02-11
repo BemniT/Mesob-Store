@@ -88,7 +88,7 @@ public class Software_Detail_Activity extends AppCompatActivity {
         bookBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Software_Detail_Activity.this, BookFragment.class);
+                Intent intent = new Intent(Software_Detail_Activity.this, Home_Activity.class);
                 startActivity(intent);
             }
         });
@@ -264,7 +264,7 @@ public class Software_Detail_Activity extends AppCompatActivity {
 
         // Create the notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.baseline_notifications_active_24)
+                .setSmallIcon(R.drawable.notifiy)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setContentIntent(pendingIntent)

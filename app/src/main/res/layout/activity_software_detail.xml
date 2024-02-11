@@ -10,7 +10,7 @@
         android:id="@+id/relative_layout2"
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        android:background="@color/blue"
+        android:background="@color/lavendar"
         >
         <ImageView
             android:id="@+id/book_backBtn"
@@ -97,10 +97,10 @@
             android:layout_height="45dp"
             android:layout_gravity="bottom"
             android:layout_marginStart="65dp"
-            android:background="@color/button"
+            android:textColor="@color/black"
+            android:background="@drawable/download_button"
             android:text="Download"
             android:textSize="20sp"
-
             />
     </LinearLayout>
 

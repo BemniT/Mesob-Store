@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parentLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -93,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:text="Recommended for you"
                     android:textStyle="bold"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="8dp"
                     />
@@ -101,25 +102,25 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/Horizontal_recyclerApp"
                 android:layout_width="match_parent"
-                android:layout_height="210dp"
+                android:layout_height="0dp"
                 android:clipToPadding="false"
                 android:paddingStart="6dp"
                 android:paddingEnd="6dp"
-                android:scrollbars="horizontal"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="40dp"
-
+                android:layout_marginTop="50dp"
+                android:background="@color/back"
+                android:visibility="visible"
                 />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="All app"
-                    android:layout_below="@id/Horizontal_recyclerApp"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:layout_marginLeft="20dp"
-                    />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="All Apps"-->
+<!--                    android:layout_below="@id/Horizontal_recyclerApp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    />-->
 
             <!-- Vertical RecyclerView -->
             <androidx.recyclerview.widget.RecyclerView
@@ -129,11 +130,22 @@
                 android:layout_below="@id/Horizontal_recyclerApp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="77dp"
-                android:padding="16dp"/>
+                android:padding="16dp"
+                android:visibility="gone"
+                />
+                <LinearLayout
+                    android:id="@+id/horizontalRecyclerViewContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_below="@id/Horizontal_recyclerApp"
+                    android:layout_marginTop="5dp">
+                </LinearLayout>
             </RelativeLayout>
 
 
         </androidx.core.widget.NestedScrollView>
+
 
 
 

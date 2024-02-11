@@ -35,6 +35,13 @@ public class Home_Activity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
 
 
+    //        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
+//        drawerLayout.addDrawerListener(toggle);
+//        toggle.syncState();
+//       if (savedInstanceState == null) {
+//        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, new App_fragment()).commit();
+//        navigationView.setCheckedItem(R.id.nav_home);
+    //}
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,45 +49,45 @@ public class Home_Activity extends AppCompatActivity {
 
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        //fab = findViewById(R.id.fab);
-        drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-
-
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, new App_fragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_home);
-        }
 
         replaceFragment(new App_fragment());
 
         bottomNavigationView.setBackground(null);
         bottomNavigationView.setOnItemSelectedListener(item -> {
+            final int ID = item.getItemId();
 
-
-            switch (item.getItemId()) {
+            switch (ID) {
                 case R.id.app:
+
                     replaceFragment(new App_fragment());
                     break;
-                case R.id.books:
-                    replaceFragment(new BookFragment());
-                    break;
+
                 case R.id.games:
                     replaceFragment(new Game_Fragment());
                     break;
-//                case R.id.library:
-//                    replaceFragment(new LibraryFragment());
-////                    break;
             }
 
             return true;
         });
+//       String fragmentLoadGame = getIntent().getStringExtra("fragmentToLoad");
+//       String fragmentLoadApp = getIntent().getStringExtra("fragmentToLoad");
+//       if (fragmentLoadGame.equals("bookFragment"))
+//       {
+//           getSupportFragmentManager().beginTransaction()
+//                   .replace(R.id.fragment_layout,new BookFragment())
+//                   .commit();
+//       }
+//       else if(fragmentLoadApp.equals("appFragment"))
+//       {
+//           getSupportFragmentManager().beginTransaction()
+//                   .replace(R.id.fragment_layout,new App_fragment())
+//                   .commit();
+//       }else {
+//
+//       }
 
 //       fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -95,6 +102,7 @@ public class Home_Activity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_layout, fragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 

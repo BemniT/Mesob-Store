@@ -5,10 +5,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/splash_background"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
     >
 
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/getstart"
+        >
 
+    </ImageView>
+    <TextView
+        android:id="@+id/firstmessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image"
+        android:text="Your App Journey Begins"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        />
 
+    <TextView
+        android:id="@+id/secondmessage"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/firstmessage"
+        android:text="A platform where you can get awesome apps and games"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        />
+
+    <ImageButton
+        android:id="@+id/getStart"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_below="@+id/firstmessage"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/getstartbtn"
+        />
 
 </RelativeLayout>

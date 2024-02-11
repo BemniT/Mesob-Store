@@ -4,19 +4,20 @@
 
     <item
         android:id="@+id/app"
-        android:title="App"
-        android:icon="@drawable/phone"/>
-
-    <item
-        android:id="@+id/games"
-        android:title="Game"
-        android:icon="@drawable/phone"
+        android:title=""
+        android:icon="@drawable/select_app"
         />
 
     <item
-        android:id="@+id/books"
-        android:title="Books"
-        android:icon="@drawable/book"
+        android:id="@+id/games"
+        android:title=""
+        android:icon="@drawable/select_game"
+        />
+
+    <item
+        android:id="@+id/User"
+        android:title=""
+        android:icon="@drawable/user2"
         />
 <!--    <item-->
 <!--        android:title=""/>-->
