@@ -47,8 +47,8 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.So
     @Override
     public void onBindViewHolder(@NonNull SoftView_Holder holder, int position) {
         Apps apps = horizontalItem.get(position);
-        holder.app_name.setText(apps.getSname());
-        Picasso.get().load(apps.getImage()).resize(200,200).into(holder.app_image);
+        holder.app_name.setText(apps.getApp_name());
+        Picasso.get().load(apps.getApp_icon_url()).resize(200,200).into(holder.app_image);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +57,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.So
                 if (AppActivity != null){
                 Intent intent = new Intent(AppActivity, App_Game_DetailActivity.class);
                 intent.putExtra("type","Apps");
-                intent.putExtra("sid",apps.getSid());
+                intent.putExtra("sid",apps.getApp_id());
                 AppActivity.startActivity(intent);
             }}
         });

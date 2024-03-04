@@ -109,6 +109,7 @@
                 android:orientation="vertical"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
+                android:layout_marginLeft="40dp"
                 >
                 <ImageView
                     android:id="@+id/image_like"
@@ -132,7 +133,7 @@
 
             </LinearLayout>
             <Space
-                android:layout_width="10dp"
+                android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
            <LinearLayout
@@ -158,11 +159,12 @@
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:textColor="@color/top_text"
+                android:textAlignment="center"
                 android:layout_gravity="center"/>
         </LinearLayout>
 
             <Space
-                android:layout_width="10dp"
+                android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
             <LinearLayout
@@ -195,7 +197,7 @@
                 />
             </LinearLayout>
             <Space
-                android:layout_width="10dp"
+                android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
             <LinearLayout
@@ -207,9 +209,9 @@
                 >
                 <ImageView
                     android:id="@+id/image_saved"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/downloadicon"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/saved_selector"
                     >
                 </ImageView>
             <TextView
@@ -224,42 +226,45 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/content_download_card"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/horizontalScrollView"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        app:cardCornerRadius="17dp"
-        >
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/content_download_card"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        -->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        app:cardCornerRadius="17dp"-->
+<!--        >-->
 
-        <ImageButton
+
+
+        <Button
             android:id="@+id/software_download"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:text="Install"
-            android:textSize="20sp"
-            android:theme="@style/Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/horizontalScrollView"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/downloadbtn"
-
-
-            />
-</androidx.cardview.widget.CardView>
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/base"
+            android:padding="10dp"
+            android:text="Download"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+<!--</androidx.cardview.widget.CardView>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/software_image_slider"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="190dp"
         android:clipToPadding="false"
-        android:paddingStart="6dp"
-        android:paddingEnd="6dp"
+        android:padding="7dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:background="@color/back"
+        android:layout_marginTop="20dp"
         android:visibility="visible"
-        android:layout_below="@+id/content_download_card"
+        android:layout_below="@+id/software_download"
         />
     <TextView
         android:id="@+id/about_this_game"
@@ -268,6 +273,7 @@
         android:text="About this content"
         android:textStyle="bold"
         android:textSize="15sp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:layout_below="@+id/software_image_slider"
         />

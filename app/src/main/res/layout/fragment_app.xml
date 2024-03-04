@@ -21,12 +21,15 @@
             android:layout_height="2dp"
             android:background="@drawable/line"
             android:layout_below="@id/horizontalScrollView"/>
+
         <HorizontalScrollView
             android:id="@+id/horizontalScrollView"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:scrollbars="none"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:paddingLeft="10dp"
+            >
 
             <LinearLayout
                 android:id="@+id/tabContainer"
@@ -40,40 +43,48 @@
                 android:id="@+id/app_foryou"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="For you"
+                android:text="@string/forYou"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@color/top_text"
+                android:textColor="@color/base"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_marginLeft="20dp"
                 />
+
 
                 <TextView
                     android:id="@+id/app_top_chart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Top Charts"
+                    android:text="@string/topChart"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="@color/top_text"
-                    android:paddingLeft="30dp"/>
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    />
 
                 <TextView
                     android:id="@+id/new_chart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="New"
+                    android:text="@string/news"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="@color/top_text"
-                    android:paddingLeft="30dp"/>
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"/>
                 <TextView
                     android:id="@+id/app_categories_chart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Categoies"
+                    android:text="@string/categories"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="@color/top_text"
-                    android:paddingLeft="30dp"/>
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"/>
 
         </LinearLayout>
         </HorizontalScrollView>
@@ -89,15 +100,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Recommended for you"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="8dp"
-                    />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/recommended"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    />-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/Horizontal_recyclerApp"
@@ -107,7 +118,6 @@
                 android:paddingStart="6dp"
                 android:paddingEnd="6dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"
                 android:background="@color/back"
                 android:visibility="visible"
                 />

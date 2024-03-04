@@ -183,7 +183,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Already have account?"
+        android:text="@string/already"
         android:layout_below="@+id/register_btn"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="25dp"
@@ -195,7 +195,7 @@
         android:id="@+id/login_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login here"
+        android:text="@string/loginhere"
         android:layout_below="@+id/register_btn"
         android:layout_marginLeft="240dp"
         android:textSize="17sp"

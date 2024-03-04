@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="100dp"
-    android:layout_height="150dp"
+    android:layout_width="95dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    android:layout_marginLeft="15dp"
+    android:layout_marginLeft="10dp"
     >
 
 
@@ -16,8 +16,8 @@
             app:cardCornerRadius="25dp">
         <ImageView
             android:id="@+id/app_image_horizontal"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
             android:padding="5dp"
             android:scaleType="center"
             />
@@ -37,9 +37,9 @@
             android:id="@+id/app_rating_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="2dp"
             android:text="4.5"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:layout_marginLeft="15dp"
             />
 

@@ -47,8 +47,11 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Vertic
     public void onBindViewHolder(@NonNull VerticalAdapter.Vertical_ViewHolder holder, int position)
     {
         Apps apps = verticalItems.get(position);
-        holder.app_name.setText(apps.getSname());
-        holder.loadAndResizeImage(apps.getImage());
+        holder.app_name.setText(apps.getApp_name());
+        Picasso.get().load(apps.getApp_icon_url())
+                .resize(140,140)
+                .centerCrop()
+                .into(holder.app_image);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -56,7 +59,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Vertic
                 if (appActivity != null){
                     Intent intent = new Intent(appActivity, App_Game_DetailActivity.class);
                     intent.putExtra("type","Apps");
-                    intent.putExtra("sid",apps.getSid());
+                    intent.putExtra("sid",apps.getApp_id());
                     appActivity.startActivity(intent);
                 }
             }
@@ -81,16 +84,6 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Vertic
             app_name = itemView.findViewById(R.id.app_name_vertical);
             app_image = itemView.findViewById(R.id.app_Image_vertical);
             app_size = itemView.findViewById(R.id.app_size_vertical);
-        }
-
-        public void loadAndResizeImage(String imageUrl) {
-            Log.d("ImageURL", imageUrl);
-           // Picasso.get().setIndicatorsEnabled(true);
-            // Use Picasso to load the image and resize it to fit within the ImageView bounds
-            Picasso.get().load(imageUrl)
-                    .resize(140,140)
-                    .centerCrop()
-                    .into(app_image);
         }
     }
 

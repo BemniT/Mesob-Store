@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +27,8 @@ import com.google.firebase.database.ValueEventListener;
 import org.w3c.dom.Text;
 
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SignUp_Activity extends AppCompatActivity {
     private ImageButton createAccountbtn;
@@ -45,6 +49,28 @@ public class SignUp_Activity extends AppCompatActivity {
 
         loadingBar = new ProgressDialog(this);
 
+        inputPhonenumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (validateMobile(inputPhonenumber.getText().toString()))
+                {
+                    createAccountbtn.setEnabled(true);
+                }else {
+                    inputPhonenumber.setError("Invalid mobile No");
+                    createAccountbtn.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         loginTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -102,6 +128,14 @@ public class SignUp_Activity extends AppCompatActivity {
         }
     }
 
+    boolean validateMobile(String input)
+    {
+        Pattern p = Pattern.compile("[0][9][0-9]{8}");
+        Matcher matcher = p.matcher(input);
+        return matcher.matches();
+
+    }
+
     private void ValidateUser(String name, String phone, String password)
     {
         final DatabaseReference Rootref;
@@ -117,6 +151,9 @@ public class SignUp_Activity extends AppCompatActivity {
                     userdataMap.put("phone", phone);
                     userdataMap.put("name", name);
                     userdataMap.put("password", password);
+                    userdataMap.put("email","");
+                    userdataMap.put("image","");
+                    userdataMap.put("address","");
 
                     Rootref.child("Users").child(phone).updateChildren(userdataMap)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {

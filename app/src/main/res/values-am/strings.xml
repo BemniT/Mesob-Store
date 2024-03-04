@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name"></string>
+    <string name="title_activity_login">Login_Activity</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--  Common for all-->
+    <string name="phone_number">ስልክ ቁጥር</string>
+    <string name="password">ማለፊያ ቃል</string>
+    <string name="login">ግባ</string>
+
+    <!--  Main Activity Strings -->
+    <string name="first_message">የእርስዎ የመተግበሪያ ጉዞ ይጀምራል</string>
+    <string name="second_message">አስደናቂ የሆኑ አፕሊኬሽኖችንና ጌሞችን ማግኘት የምትችሉበት መድረክ</string>
+    <string name="getStartButton">ጀምር</string>
+
+    <!--  Login Activity Strings -->
+    <string name="letStart">እንኳን በደህና ተመለስዎ!</string>
+    <string name="secondLetStart">Mesob store ላይ ወዳሎት አካውንት ይግብ</string>
+    <string name="rememberMe">አስታውሰኝ</string>
+    <string name="forgotPassword">ማለጊያ ቃሎትን ርስትዋል?</string>
+    <string name="signUp">ይመዝገብ</string>
+    <string name="already">አካውንት አሎት?</string>
+    <string name="loginhere">ይግብ እዚህ</string>
+
+    <!--  Home Activity Strings -->
+    <string name="forYou">ለርሶ</string>
+    <string name="topChart">ደረጃ</string>
+    <string name="news">አዲስ</string>
+    <string name="categories">ምድቦች</string>
+    <string name="recommended">ለርሶ የተመረጡ</string>
+    <string name="searchHint">ፍልግ</string>
+
+    <!-- BottomSheetLayout -->
+    <string name="editProfile">ፕሮፌይል ያስተካክሉ</string>
+    <string name="download">የወረዱ</string>
+    <string name="save_content">የተቀመጡ</string>
+    <string name="notification">መልክቶች</string>
+    <string name="settings">ማስተካከያ</string>
+    <string name="help">እርዳታ እና አስተያየት</string>
+
+    <string name="language">ቋንቋ</string>
+    <string name="logout">ውጣ</string>
+
+</resources>

@@ -41,11 +41,11 @@ public class Game_HorizontalAdapter extends RecyclerView.Adapter<Game_Horizontal
     public void onBindViewHolder(@NonNull Game_HorizontalAdapter.ViewHolder holder, int position) {
 
         Games games = horizontalItems.get(position);
-        holder.game_name.setText(games.getSname());
-        Picasso.get().load(games.getImage())
+        holder.game_name.setText(games.getApp_name());
+        Picasso.get().load(games.getImage_1())
                 .resize(500,250)
                 .into(holder.game_image);
-        Picasso.get().load(games.getIcon())
+        Picasso.get().load(games.getApp_icon_url())
                 .resize(130,130)
                 .into(holder.game_icon);
 
@@ -56,7 +56,7 @@ public class Game_HorizontalAdapter extends RecyclerView.Adapter<Game_Horizontal
                 if (gameActivity != null)
                 {
                     Intent intent = new Intent(gameActivity, App_Game_DetailActivity.class);
-                    intent.putExtra("sid",games.getSid());
+                    intent.putExtra("sid",games.getApp_id());
                     intent.putExtra("type","Games");
                     gameActivity.startActivity(intent);
                 }

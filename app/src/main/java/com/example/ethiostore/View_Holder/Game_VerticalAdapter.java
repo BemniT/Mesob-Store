@@ -44,8 +44,8 @@ public class Game_VerticalAdapter extends RecyclerView.Adapter<Game_VerticalAdap
     @Override
     public void onBindViewHolder(@NonNull Game_VerticalAdapter.verticalViewHolder holder, int position) {
         Games games = gamesListVertical.get(position);
-        holder.game_name.setText(games.getSname());
-        Picasso.get().load(games.getImage())
+        holder.game_name.setText(games.getApp_name());
+        Picasso.get().load(games.getApp_icon_url())
                 .resize(180,180)
                 .into(holder.game_image);
 
@@ -56,7 +56,7 @@ public class Game_VerticalAdapter extends RecyclerView.Adapter<Game_VerticalAdap
                 if (gameActivity != null)
                 {
                     Intent intent = new Intent(gameActivity, App_Game_DetailActivity.class);
-                    intent.putExtra("sid",games.getSid());
+                    intent.putExtra("sid",games.getApp_id());
                     intent.putExtra("type","Games");
                     gameActivity.startActivity(intent);
                 }

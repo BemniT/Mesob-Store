@@ -11,4 +11,8 @@
     <color name="Background">#FFF2DD</color>
     <color name="base">#00B0FF</color>
     <color name="back">#D9D9D9</color>
+    <color name="hintColor">#B4000000</color>
+    <color name="bars">#0D00B0FF</color>
+    <color name="bars1">#0000B0FF</color>
+    <color name="border">#1C274C</color>
 </resources>

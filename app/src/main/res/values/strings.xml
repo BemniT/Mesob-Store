@@ -5,7 +5,47 @@
     <string name="close_nav">Close Navigation Drawer</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--  Common for all-->
     <string name="phone_number">Phone Number</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="login">Login</string>
+
+    <!--  Main Activity Strings -->
+    <string name="first_message">Your App Journey Begins</string>
+    <string name="second_message">A platform where you can get awesome apps and games</string>
+    <string name="getStartButton">Get Started</string>
+
+    <!--  Login Activity Strings -->
+    <string name="letStart">Welcome Back!</string>
+    <string name="secondLetStart">Log in your existant account of Mesob Store</string>
+    <string name="rememberMe">Remember Me</string>
+    <string name="forgotPassword">Forgot Password?</string>
+    <string name="signUp">Sign Up</string>
+    <string name="already">Already have account?</string>
+    <string name="loginhere">Login here</string>
+
+    <!--  Home Activity Strings -->
+    <string name="forYou">For you</string>
+    <string name="topChart">Top Chart</string>
+    <string name="news">New</string>
+    <string name="categories">Categories</string>
+    <string name="recommended">Recommended for you</string>
+    <string name="searchHint">Search content</string>
+
+    <!-- BottomSheetLayout -->
+    <string name="editProfile">Edit profile</string>
+    <string name="download">Downloads</string>
+    <string name="save_content">Save apps and games</string>
+    <string name="notification">Notification and offers</string>
+    <string name="settings">Settings</string>
+    <string name="help">Help and feedback</string>
+
+    <string name="language">Language</string>
+    <string name="logout">Logout</string>
+
+
+
 
 
     <!--<string name="title_home">Home</string>

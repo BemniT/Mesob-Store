@@ -8,9 +8,10 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ethiostore.Model.Account;
 import com.example.ethiostore.Model.Comment;
 import com.example.ethiostore.R;
-
+import com.squareup.picasso.Picasso;
 
 
 import java.text.SimpleDateFormat;
@@ -19,9 +20,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
 
     private List<Comment> commentList;
+    private List<Account> accountsList;
 
     public CommentAdapter(List<Comment> commentList) {
         this.commentList = commentList;
@@ -50,12 +54,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         private TextView userName;
         private TextView commentText;
         private TextView commentTimestamp;
+        private CircleImageView userProfile;
 
         public CommentViewHolder(@NonNull View itemView) {
             super(itemView);
             userName = itemView.findViewById(R.id.commentUsername);
             commentText = itemView.findViewById(R.id.commentText);
             commentTimestamp = itemView.findViewById(R.id.commentTimestamp);
+            userProfile = itemView.findViewById(R.id.profile_picture);
         }
 
         public void bind(Comment comment) {
@@ -64,6 +70,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 //            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault());
 //            String formattedDate = sdf.format(new Date(comment.getTimestamp()));
             commentTimestamp.setText(comment.getTimestamp());
+            Picasso.get().load(comment.getUserImage()).into(userProfile);
         }
     }
 }

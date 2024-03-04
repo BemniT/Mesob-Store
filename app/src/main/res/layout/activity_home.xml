@@ -20,27 +20,60 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="90dp"
+            android:layout_height="65dp"
             android:background="@color/white"
             android:elevation="4dp"
             android:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+
+            <EditText
+                android:id="@+id/search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginRight="70dp"
+                android:background="@drawable/bar"
+                android:layout_centerVertical="true"
+                android:hint="@string/searchHint"
+                android:textSize="15sp"
+                android:paddingStart="20dp"
+                android:textColorHint="@color/hintColor"
+                android:drawableStart="@drawable/baseline_search_24"
+                android:drawablePadding="10dp"
+                android:autoHandwritingEnabled="false"
+                android:cursorVisible="false"
+                >
+
+            </EditText>
+
+
+                <ImageView
+                    android:id="@+id/search_voice"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="90dp"
+                    android:src="@drawable/voice"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    >
+
+                </ImageView>
+
+            </RelativeLayout>
 
             <ImageView
-                android:layout_width="45dp"
-                android:layout_height="55dp"
+                android:id="@+id/notificationBtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/notifiy"
                 android:layout_gravity="end"
                 android:layout_marginRight="15dp"
                 />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="63dp"
-                android:layout_marginRight="17dp"
-                android:src="@drawable/search" />
-
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -71,25 +104,27 @@
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:layout_gravity="bottom"
-            android:backgroundTint="@color/back"
+            android:backgroundTint="@color/bars"
             app:fabCradleMargin="10dp"
             >
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNavigationView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:background="@color/back"
-                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                android:background="@color/bars1"
+                app:backgroundTint="@color/bars1"
+                android:gravity="center"
                 app:menu="@menu/bottom_menu"
-                app:itemIconSize="40dp"
-                app:itemBackground="@color/back"
+                app:itemIconSize="30dp"
+                app:itemBackground="@color/bars1"
                 app:itemIconTint="@color/base"
-                app:itemRippleColor="@color/back"
-                app:itemActiveIndicatorStyle="@color/back"
+                app:itemPaddingTop="20dp"
+                app:itemActiveIndicatorStyle="@color/bars"
+
                 />
 
         </com.google.android.material.bottomappbar.BottomAppBar>
